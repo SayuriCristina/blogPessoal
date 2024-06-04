@@ -28,7 +28,6 @@ public class BasicSecurityConfig {
 
     @Bean
     UserDetailsService userDetailsService() {
-
         return new UserDetailsServiceImpl();
     }
 
@@ -47,29 +46,29 @@ public class BasicSecurityConfig {
 
     @Bean
     AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
-            throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
-    }
+    	throws Exception {
+    		return authenticationConfiguration.getAuthenticationManager();
+    	}
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
     	http
-	        .sessionManagement(management -> management
-	                .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-	        		.csrf(csrf -> csrf.disable())
-	        		.cors(withDefaults());
-
+    	.sessionManagement(management -> management
+        		.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        		.csrf(csrf -> csrf.disable())
+        		.cors(withDefaults());
+    	
     	http
-	        .authorizeHttpRequests((auth) -> auth
-	                .requestMatchers("/usuarios/logar").permitAll()
-	                .requestMatchers("/usuarios/cadastrar").permitAll()
-	                .requestMatchers("/error/**").permitAll()
-	                .requestMatchers(HttpMethod.OPTIONS).permitAll()
-	                .anyRequest().authenticated())
-	        .authenticationProvider(authenticationProvider())
-	        .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
-	        .httpBasic(withDefaults());
+    	.authorizeHttpRequests((auth) -> auth
+        		.requestMatchers("/usuarios/logar").permitAll()
+        		.requestMatchers("/usuarios/cadastrar").permitAll()
+        		.requestMatchers("/error/**").permitAll()
+        		.requestMatchers(HttpMethod.OPTIONS).permitAll()
+        		.anyRequest().authenticated())
+    	.authenticationProvider(authenticationProvider())
+    	.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
+    	.httpBasic(withDefaults());
 
 		return http.build();
 

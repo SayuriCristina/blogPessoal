@@ -27,9 +27,9 @@ public class Usuario {
 	@NotNull (message = "O atributo nome é obrigatório")
 	private String nome;
 	
-	@NotNull (message = "O atributo email é obrigatório")
-	@Email (message = "O atributo deve ser um email valido")
-	private String email;
+	@NotNull (message = "O atributo usuario é obrigatório")
+	@Email (message = "O atributo deve ser um usuario valido")
+	private String usuario;
 	
 	@NotNull (message = "O atributo nome é obrigatório")
 	@Size(min = 8, message = "A senha deve ter no mínimo 8 caracteres")
@@ -58,12 +58,12 @@ public class Usuario {
 		this.nome = nome;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getUsuario() {
+		return usuario;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setusuario(String usuario) {
+		this.usuario = usuario;
 	}
 
 	public String getSenha() {
