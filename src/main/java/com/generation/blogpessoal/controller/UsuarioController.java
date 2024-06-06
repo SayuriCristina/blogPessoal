@@ -20,24 +20,24 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/usuarios")
-@CrossOrigin(origins="*", allowedHeaders = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UsuarioController {
-	
+
 	@Autowired
 	private UsuarioService usuarioService;
-	
+
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-	
+
 	@PostMapping("/cadastrar")
-	public ResponseEntity<Usuario> postUsuario(@RequestBody @Valid Usuario usuario){
+	public ResponseEntity<Usuario> postUsuario(@RequestBody @Valid Usuario usuario) {
 		return usuarioService.cadastrarUsuario(usuario)
 				.map(resposta -> ResponseEntity.status(HttpStatus.CREATED).body(resposta))
 				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
-	
+
 	@PostMapping("/logar")
-	public ResponseEntity<UsuarioLogin> autenticarUsuario(@RequestBody Optional<UsuarioLogin> usuarioLogin){
+	public ResponseEntity<UsuarioLogin> autenticarUsuario(@RequestBody Optional<UsuarioLogin> usuarioLogin) {
 		return usuarioService.autenticarUsuario(usuarioLogin)
 				.map(resposta -> ResponseEntity.status(HttpStatus.OK).body(resposta))
 				.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
